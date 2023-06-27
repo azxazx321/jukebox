@@ -19,6 +19,8 @@ export default class Jukebox extends Component {
             <span>Play song:</span>
             <button onClick={()=>{this.chooseSong('./songs/fantasy-classical.mp3')}}>fantasy</button>
             <button onClick={()=>{this.chooseSong('./songs/gates-of-heaven.mp3')}}>Gates</button>
+            <button onClick={()=>{this.chooseSong('./songs/grand-orchestra.mp3')}}>Gates</button>
+            <button onClick={()=>{this.chooseSong('./songs/piano-song.mp3')}}>Gates</button>
 
             
             {this.state.song === '' ? <p>audio disabled</p> : <AudioPlayer audioURL={this.state.song}/>}
