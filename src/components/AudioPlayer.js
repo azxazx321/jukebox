@@ -1,28 +1,38 @@
-import { getSuggestedQuery } from '@testing-library/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export default function AudioPlayer(props) {
     let [status, setStatus] = useState('paused')
-    const [url,setUrl] = useState(props.audioURL)
-    const [audioElement, setAudioElement] = useState(new Audio(url))
-    //audioElement.autoplay = true
+    const [url,setUrl] = useState('')
+    const [audioElement, setAudioElement] = useState(null)
+  
+    const audioElementRef = useRef(null);
 
+
+    let loadMusic = (props) =>{
+        setUrl(props.audioURL)
+        const a = new Audio(props.audioURL)
+        setAudioElement(a)
+        console.log(url,audioElement)
+        audioElementRef.current = a
+        
+    }
 
    
     let pauseMusic = () => {
-        console.log('pauseMusic')
+        console.log('pauseMusic1',)
        
-        console.log(status)
-        if (status !== 'paused') {
+        console.log(url,status,audioElement)
+        if (status !== 'paused' && audioElement) {
             audioElement.pause()
             setStatus('paused')
         } else return
+
         
     }
 
     let playMusic = () => {
-        console.log('playMusic')
-        if(status === 'paused') {
+        console.log('playMusic1',audioElement,url)
+        if(status === 'paused' && audioElement) {
             console.log('play music')
             audioElement.play()
             setStatus('playing')
@@ -32,24 +42,31 @@ export default function AudioPlayer(props) {
     }
 
     useEffect(() => {
-
-        playMusic();
+        console.log(props,'initial')
+        loadMusic(props)
+        
+      
         return ()=> {
-            pauseMusic()
+            console.log('unmount',audioElement)
+            audioElementRef.current.pause()
         };
     }, [])
 
-    useEffect(() => {
+    useEffect(()=>{
+        console.log('props',props)
         pauseMusic()
-        setUrl(props.audioURL);
-        console.log('first')
-      }, [props.audioURL]);
-    
-      useEffect(() => {
-        setAudioElement(new Audio(url));
-        console.log('second')
-      }, [url]);
+        loadMusic(props)
 
+        
+
+    },[props.audioURL])
+
+    useEffect(()=>{
+        playMusic()
+
+    },[url])
+
+   
     
   return (
     
