@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/react-gh-pages/static/js/main.ba3704c4.js",
-    "index.html": "/react-gh-pages/index.html",
-    "main.ba3704c4.js.map": "/react-gh-pages/static/js/main.ba3704c4.js.map"
+    "main.js": "/jukebox/static/js/main.ba3704c4.js",
+    "index.html": "/jukebox/index.html",
+    "main.ba3704c4.js.map": "/jukebox/static/js/main.ba3704c4.js.map"
   },
   "entrypoints": [
     "static/js/main.ba3704c4.js"
